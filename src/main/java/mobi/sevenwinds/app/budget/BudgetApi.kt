@@ -13,12 +13,15 @@ import com.papsign.ktor.openapigen.route.route
 
 fun NormalOpenAPIRoute.budget() {
     route("/budget") {
-        route("/add").post<Unit, BudgetRecord, BudgetRecord>(info("Добавить запись")) { param, body ->
+        route("/add")
+            .post<Unit, BudgetRecord, BudgetRecord>(info("Добавить запись"))
+            { param, body ->
             respond(BudgetService.addRecord(body))
         }
 
         route("/year/{year}/stats") {
-            get<BudgetYearParam, BudgetYearStatsResponse>(info("Получить статистику за год")) { param ->
+            get<BudgetYearParam, BudgetYearStatsResponse>(info("Получить статистику за год"))
+            { param ->
                 respond(BudgetService.getYearStats(param))
             }
         }
